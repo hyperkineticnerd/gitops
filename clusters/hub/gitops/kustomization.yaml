@@ -7,12 +7,9 @@ resources:
 - applications/jellyfin.yaml
 - applications/matrix-redis.yaml
 - applications/matrix-synapse.yaml
-- applications/netbox-redis.yaml
-- applications/netbox.yaml
 - operators/advanced-cluster-management.yaml
 - operators/advanced-cluster-security.yaml
-- operators/argocd.yaml
-- operators/compliance.yaml
-- operators/file-integrity.yaml
-- operators/keycloak.yaml
 - operators/odf-lvm.yaml
+- operators/openshift-gitops.yaml
+- operators/openshift-compliance.yaml
+- operators/rhsso.yaml
