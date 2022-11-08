@@ -1,0 +1,21 @@
+﻿---
+apiVersion: apps.gitlab.com/v1beta1
+kind: GitLab
+metadata:
+  name: gitlab
+  namespace: gitlab-system
+spec:
+  chart:
+    values:
+      #### values.yaml starts here
+      postgresql:
+        install: false
+      global:
+        psql:
+          host: external-postgres.example.com
+          port: 5432
+          database: gitlabhq_production
+          username: gitlab
+          password:
+            secret: my-postgresql-secret
+            key: secret

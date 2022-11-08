@@ -1,0 +1,18 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- applications/cluster-gitops.yaml
+- applications/jellyfin.yaml
+- applications/matrix-redis.yaml
+- applications/matrix-synapse.yaml
+- applications/netbox-redis.yaml
+- applications/netbox.yaml
+- operators/advanced-cluster-management.yaml
+- operators/advanced-cluster-security.yaml
+- operators/argocd.yaml
+- operators/compliance.yaml
+- operators/file-integrity.yaml
+- operators/keycloak.yaml
+- operators/odf-lvm.yaml

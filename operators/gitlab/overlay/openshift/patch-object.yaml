@@ -1,0 +1,30 @@
+---
+apiVersion: apps.gitlab.com/v1beta1
+kind: GitLab
+metadata:
+  name: gitlab
+  namespace: gitlab-system
+spec:
+  chart:
+    values:
+      #### values.yaml starts here
+      global:
+        registry:
+          bucket: "gitlab/registry"
+        appConfig:
+          object_store:
+            enabled: true
+            connection:
+              secret: "my-object-store-secret"
+              key: "connection"
+          uploads:
+            bucket: "gitlab/uploads"
+          lfs:
+            bucket: "gitlab/lfs"
+          artifacts:
+            bucket: "gitlab/artifacts"
+          packages:
+            bucket: "gitlab/packages"
+          backups:
+            bucket: "my-backup-bucket-name"
+            tmpBucket: "my-tmpbackup-bucket-name"

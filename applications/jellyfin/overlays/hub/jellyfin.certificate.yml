@@ -1,0 +1,17 @@
+kind: Certificate
+apiVersion: cert-manager.io/v1
+metadata:
+  namespace: jellyfin
+  name: letsencrypt-cert
+spec:
+  commonName: jellyfin.example.com
+  dnsNames:
+    - jellyfin.example.com
+  IssuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 4096
+  secretName: jellyfin-tls

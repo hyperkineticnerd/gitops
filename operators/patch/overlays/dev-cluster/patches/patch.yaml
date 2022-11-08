@@ -1,0 +1,22 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: Patch
+metadata:
+  name: patch-operator-mutatingwebhookconfiguration
+  namespace: patch-operator
+spec:
+  serviceAccountRef:
+    name: mutatingwebhook-patcher
+  patches:
+    patch-operator-mutatingwebhookconfigurations:
+      targetObjectRef:
+        apiVersion: admissionregistration.k8s.io/v1
+        kind: MutatingWebhookConfiguration
+        name: patch-operator-inject
+      patchTemplate: '[{"op": "replace", "path": "/webhooks/0/clientConfig/caBundle", "value":"{{ (index (index . 1).data "olmCAKey") }}"}]'     
+      patchType: application/json-patch+json
+      sourceObjectRefs:
+      - apiVersion: v1
+        kind: Secret
+        name: patch-operator-controller-manager-service-cert
+        namespace: patch-operator
+

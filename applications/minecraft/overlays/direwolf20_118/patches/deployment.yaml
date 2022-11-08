@@ -1,0 +1,13 @@
+---
+# - op: replace
+#   path: /metadata/name
+#   value: atm7
+# - op: replace
+#   path: /metadata/namespace
+#   value: test
+- op: replace
+  path: /spec/template/spec/containers/0/resources/limits/memory
+  value: 16Gi
+- op: replace
+  path: /spec/template/spec/containers/0/resources/requests/memory
+  value: 8Gi

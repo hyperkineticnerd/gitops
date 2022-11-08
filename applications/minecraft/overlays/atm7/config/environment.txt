@@ -1,0 +1,10 @@
+MEMORY="6G"
+MOTD=My All-The-Mods 7
+TYPE=CURSEFORGE
+VERSION=1.18.2
+FORGE_VERSION=40.1.80
+CF_SERVER_MOD=http://www.example.com/modpacks/ATM7-0.4.34-server.zip
+CF_BASE_DIR=/data
+WHITELIST_FILE=/extras/whitelist.json
+OPS_FILE=/extras/ops.json
+VANILLATWEAKS_SHARECODE=4jK54N

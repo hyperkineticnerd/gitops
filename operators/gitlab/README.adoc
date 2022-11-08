@@ -1,0 +1,15 @@
+= GitLab
+
+== Base
+
+* Home for Helm Chart or Operator Subscription
+
+== Overlays
+
+=== Default
+
+* Default deployment
+
+=== OpenShift
+
+* Layer for OpenShift-only

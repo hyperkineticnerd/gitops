@@ -1,0 +1,20 @@
+﻿---
+apiVersion: apps.gitlab.com/v1beta1
+kind: GitLab
+metadata:
+  name: gitlab
+  namespace: gitlab-system
+spec:
+  chart:
+    values:
+      #### values.yaml starts here
+      global:
+        gitaly:
+          enabled: false
+          external:
+            - name: default
+              hostname: external.storage.example.com
+              port: 8075
+          authToken:
+            secret: external-gitaly-token
+            key: token

@@ -1,0 +1,38 @@
+﻿---
+apiVersion: apps.gitlab.com/v1beta1
+kind: GitLab
+metadata:
+  name: gitlab
+  namespace: gitlab-system
+spec:
+  chart:
+    values:
+      global:
+        hosts:
+          domain: developer.example.com
+          hostSuffix: null
+        pages:
+          enabled: true
+          host: pages.example.com
+
+      gitlab:
+        webservice:
+          ingress:
+            tls:
+              secretName: tls-gitlab
+        kas:
+          ingress:
+            tls:
+              secretName: tls-kas
+        gitlab-pages:
+          ingress:
+            tls:
+              secretName: tls-pages
+      minio:
+        ingress:
+          tls:
+            secretName: tls-minio
+      registry:
+        ingress:
+          tls:
+            secretName: tls-registry

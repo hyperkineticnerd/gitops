@@ -1,0 +1,18 @@
+kind: KeycloakClient
+apiVersion: keycloak.org/v1alpha1
+metadata:
+  name: example-keycloakclient
+  labels:
+    client: example-keycloakclient
+  namespace: rhsso
+spec:
+  realmSelector:
+    matchLabels:
+      sso-realm: us
+  client:
+    name: example-keycloakclient
+    clientId: example-keycloakclient
+    baseUrl: /
+    rootUrl: https://localhost:5000
+    redirectUris:
+      - /oidc_callback/*

@@ -1,0 +1,24 @@
+﻿kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  annotations:
+    route.openshift.io/termination: edge
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: jellyfin
+  namespace: jellyfin
+spec:
+  tls:
+    - hosts:
+        - jellyfin.example.com
+      secretName: jellyfin-tls
+  rules:
+    - host: jellyfin.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: jellyfin
+                port:
+                  number: 8096

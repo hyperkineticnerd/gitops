@@ -1,0 +1,43 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openshift-cert-manager
+  namespace: openshift-gitops
+  labels:
+    name: openshift-cert-manager
+spec:
+  project: default # tenant
+
+  source:
+    repoURL: https://github.com/hyperkineticnerd/gitops.git
+    targetRevision: HEAD
+    path: operators/openshift-cert-manager/overlays/hub-cluster
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: openshift-cert-manager-operator
+
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+      allowEmpty: false
+    syncOptions:
+    - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+
+  ignoreDifferences:
+  # - group: apps
+  #   kind: Deployment
+  #   jsonPointers:
+  #   - /spec/replicas
+  - group: "*"
+    kind: "*"
+    managedFieldsManagers:
+    - kube-controller-manager

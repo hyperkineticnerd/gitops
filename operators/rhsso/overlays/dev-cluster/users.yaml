@@ -1,0 +1,18 @@
+kind: KeycloakUser
+apiVersion: keycloak.org/v1alpha1
+metadata:
+  name: example-realm-user
+  labels:
+    app: sso
+  namespace: rhsso
+spec:
+  user:
+    username: realm_user
+    firstName: John
+    lastName: Doe
+    email: user@example.com
+    enabled: true
+    emailVerified: false
+  realmSelector:
+    matchLabels:
+      app: sso

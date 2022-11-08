@@ -1,0 +1,47 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: minecraft-vanillaplus
+
+commonLabels:
+  app: game
+  game: minecraft
+  modpack: vanillaplus
+  modpack-id: "N/A"
+  modpack-type: fabric
+  modpack-source: CurseForge
+  modpack-version: v0.0.1
+  modpack-version-id: "N/A"
+
+bases:
+- ../../base
+
+# resources:
+# - namespace.yaml
+# - data.yaml
+
+configMapGenerator:
+- name: minecraft-env
+  envs: 
+  - config/environment.txt
+- name: minecraft-server-files
+  # files:
+  # - ops.json=config/ops.json
+  # - whitelist.json=config/whitelist.json
+  # - vt-datapacks.json=config/vt-datapacks.json
+  # - vt-craftingtweaks.json=config/vt-craftingtweaks.json
+  # - vt-resourcepacks.json=config/vt-resourcepacks.json
+
+patches:
+# patchesJson6902:
+- target:
+    kind: Service
+    version: v1
+    name: minecraft-server
+  path: patches/service.yaml
+- target:
+    kind: Deployment
+    version: v1
+    name: minecraft-server
+  path: patches/deployment.yaml

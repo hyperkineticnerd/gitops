@@ -1,0 +1,27 @@
+{
+    "type": "datapacks",
+    "version": "1.18",
+    "packs": {
+        "survival": [
+            "afk display",
+            "multiplayer sleep",
+            "track statistics",
+            "track raw statistics"
+        ],
+        "items": [
+            "player head drops"
+        ],
+        "mobs": [
+            "anti creeper grief",
+            "anti enderman grief",
+            "anti ghast grief",
+            "double shulker shells",
+            "more mob heads",
+            "silence mobs"
+        ],
+        "utilities": [
+            "spectator conduit power",
+            "spectator night vision"
+        ]
+    }
+}

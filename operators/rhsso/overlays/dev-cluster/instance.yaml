@@ -1,0 +1,20 @@
+kind: Keycloak
+apiVersion: keycloak.org/v1alpha1
+metadata:
+  name: keycloak
+  labels:
+    app: sso
+  namespace: rhsso
+spec:
+  instances: 1
+  storageClassName: ocs-storagecluster-cephfs
+  externalAccess:
+    enabled: true
+  # externalDatabase:
+  #   enabled: false
+  # keycloakDeploymentSpec:
+  #   experimental:
+  #     env:
+  #     - name: JAVA_TOOL_OPTIONS
+  #       value: >-
+  #         -Dcom.redhat.fips=false

@@ -1,0 +1,70 @@
+﻿---
+apiVersion: apps.gitlab.com/v1beta1
+kind: GitLab
+metadata:
+  name: gitlab
+  namespace: gitlab-system
+spec:
+  chart:
+    values:
+      #### values.yaml starts here
+      gitlab:
+        toolbox:
+          backups:
+            objectStorage:
+              config:
+                secret: minio-rails-secrets
+                key: connection
+      global:
+        appConfig:
+          object_store:
+            enabled: true
+            proxy_download: true
+            storage_options: {}
+            connection:
+              secret: rails-minio-secrets
+              key: connection
+          lfs:
+            bucket: git-lfs
+            # connection:
+            #   secret: rails-minio-secrets
+            #   key: connection
+          artifacts:
+            bucket: gitlab-artifacts
+            # connection:
+            #   secret: rails-minio-secrets
+            #   key: connection
+          uploads:
+            bucket: gitlab-uploads
+            # connection:
+            #   secret: rails-minio-secrets
+            #   key: connection
+          packages:
+            bucket: gitlab-packages
+            # connection:
+            #   secret: rails-minio-secrets
+            #   key: connection
+          externalDiffs:
+            bucket: gitlab-mr-diffs
+          terraformState:
+            bucket: gitlab-terraform-state
+          ciSecureFiles:
+            bucket: gitlab-ci-secure-files
+          dependencyProxy:
+            bucket: gitlab-dependency-proxy
+          backups:
+            bucket: gitlab-backups
+            tmpBucket: tmp
+            # connection:
+            #   secret: minio-rails-secrets
+            #   key: connection
+        minio:
+          enabled: false
+        registry:
+          storage:
+            secret: minio-registry-secrets
+            key: storage
+      registry:
+        storage:
+          secret: minio-registry-secrets
+          key: storage

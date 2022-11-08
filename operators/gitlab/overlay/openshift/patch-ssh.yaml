@@ -1,0 +1,23 @@
+﻿---
+apiVersion: apps.gitlab.com/v1beta1
+kind: GitLab
+metadata:
+  name: gitlab
+  namespace: gitlab-system
+spec:
+  chart:
+    values:
+      global:
+        shell:
+          port: 32022
+      gitlab:
+        gitlab-shell:
+          sshDaemon: gitlab-sshd
+          service:
+            type: NodePort
+            nodePort: 32022
+      nginx-ingress:
+        enabled: false
+        # controller:
+        #   service:
+        #     type: NodePort

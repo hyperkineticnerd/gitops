@@ -1,0 +1,21 @@
+﻿---
+apiVersion: apps.gitlab.com/v1beta1
+kind: GitLab
+metadata:
+  name: gitlab
+  namespace: gitlab-system
+spec:
+  chart:
+    values:
+      global:
+        ingress:
+          annotations:
+            route.openshift.io/termination: edge
+          class: nginx
+          configureCertmanager: false
+
+      nginx-ingress:
+        enabled: false
+
+      certmanager:
+        install: false

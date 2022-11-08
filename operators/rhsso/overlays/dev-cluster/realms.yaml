@@ -1,0 +1,16 @@
+kind: KeycloakRealm
+apiVersion: keycloak.org/v1alpha1
+metadata:
+  name: example-keycloakrealm
+  labels:
+    sso-realm: us
+  namespace: rhsso
+spec:
+  realm:
+    id: us
+    realm: us
+    enabled: true
+    displayName: US Realm
+  instanceSelector:
+    matchLabels:
+      app: sso

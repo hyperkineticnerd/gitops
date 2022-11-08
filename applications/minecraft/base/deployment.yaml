@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-server
+  namespace: minecraft
+spec:
+  replica: 1
+  selector:
+    matchLabels:
+      app: game
+      game: minecraft
+      modpack: vanilla
+  template:
+    metadata:
+      labels:
+        app: game
+        game: minecraft
+        modpack: vanilla
+    spec:
+      containers:
+      - name: server
+        image: itzg/minecraft-server:java17
+        ports:
+        - name: game
+          containerPort: 25565
+          protocol: TCP
+        resources:
+          requests:
+            cpu: "2"
+            memory: 6Gi
+          limits:
+            cpu: "4"
+            memory: 8Gi
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop:
+            - ALL
+          seccompProfile:
+            type: RuntimeDefault
+        env:
+        - name: EULA
+          value: "TRUE"
+        envFrom:
+        - configMapRef:
+            name: minecraft-env
+        volumeMounts:
+        - name: minecraft-data
+          mountPath: /data
+        - name: minecraft-world-data
+          mountPath: /data/world
+        - name: minecraft-server-files
+          mountPath: /extras
+      volumes:
+      - name: minecraft-data
+        emptyDir: {}
+      - name: minecraft-server-files
+        configMap:
+          name: minecraft-server-files
+      - name: minecraft-world-data
+        persistentVolumeClaim:
+          claimName: minecraft-world-claim

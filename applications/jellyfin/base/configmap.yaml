@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jellyfin
+  namespace: jellyfin
+data:
+  DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: "1"
+  JELLYFIN_LOG_DIR: /config/log
+  JELLYFIN_CONFIG_DIR: /config/config
+  LANG: en_US.UTF-8
+  JELLYFIN_MEDIA_DIR: /media
+  JELLYFIN_DATA_DIR: /config
+  JELLYFIN_WEB_DIR: /jellyfin/jellyfin-web
+  JELLYFIN_CACHE_DIR: /cache
+  JELLYFIN_FFMPEG: /usr/lib/jellyfin-ffmpeg/ffmpeg
+  LC_ALL: en_US.UTF-8
+  LANGUAGE: en_US:en
