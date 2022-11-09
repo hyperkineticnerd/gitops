@@ -4,6 +4,8 @@ OpenShift GitOps Example
 Someday I'll figure out how to write!
 == Directory Structure
 
+[source]
+-----
 ├── applications
 │   ├── jellyfin
 │   └── minecraft
@@ -27,7 +29,6 @@ Someday I'll figure out how to write!
 │   ├── rhsso
 │   └── service-mesh
 └── README.md
-
-22 directories, 1 file
+-----
 
 
