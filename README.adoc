@@ -1,0 +1,33 @@
+= gitops
+OpenShift GitOps Example
+
+Someday I'll figure out how to write!
+== Directory Structure
+
+├── applications
+│   ├── jellyfin
+│   └── minecraft
+├── clusters
+│   └── hub
+├── operators
+│   ├── advanced-cluster-management
+│   ├── advanced-cluster-security
+│   ├── file-integrity
+│   ├── gitlab
+│   ├── local-storage
+│   ├── nmstate
+│   ├── node-feature-discovery
+│   ├── odf-lvm
+│   ├── openshift-cert-manager
+│   ├── openshift-compliance
+│   ├── openshift-data-foundations
+│   ├── openshift-gitops
+│   ├── patch
+│   ├── quay
+│   ├── rhsso
+│   └── service-mesh
+└── README.md
+
+22 directories, 1 file
+
+
