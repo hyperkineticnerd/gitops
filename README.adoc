@@ -1,35 +1,32 @@
 = gitops
 OpenShift GitOps Example
 
-Someday I'll figure out how to write!
-
 == Directory Structure
 
 [source]
 -----
 ├── applications
-│   ├── jellyfin
-│   └── minecraft
+│   ├── jellyfin                    <== Jellyfin Media Server
+│   └── minecraft                   <== Minecraft Server
 ├── clusters
-│   └── hub
-├── operators
-│   ├── advanced-cluster-management
-│   ├── advanced-cluster-security
-│   ├── file-integrity
-│   ├── gitlab
-│   ├── local-storage
-│   ├── nmstate
-│   ├── node-feature-discovery
-│   ├── odf-lvm
-│   ├── openshift-cert-manager
-│   ├── openshift-compliance
-│   ├── openshift-data-foundations
-│   ├── openshift-gitops
-│   ├── patch
-│   ├── quay
-│   ├── rhsso
-│   └── service-mesh
-└── README.md
+│   └── hub                         <== Repo for Cluster
+└── operators
+    ├── advanced-cluster-management <== Red Hat Advanced Cluster Management
+    ├── advanced-cluster-security   <== Red Hat Advanced Cluster Security (Central deployment)
+    ├── file-integrity              <== Red Hat CoreOS File Integrity
+    ├── gitlab                      <== GitLab Server
+    ├── local-storage               <== Local Storage for OpenShift Data Foundations
+    ├── nmstate                     <== NMState for NetworkManager connection configuration
+    ├── node-feature-discovery      <== Node Feature Discovery for Node Annotationing
+    ├── odf-lvm                     <== LVM Storage for OpenShift Data Foundations
+    ├── openshift-cert-manager      <== Cert Manager for OpenShift
+    ├── openshift-compliance        <== OpenShift Compliance for STIGs
+    ├── openshift-data-foundations  <== OpenShift Data Foundations for Dynamic Storage
+    ├── openshift-gitops            <== OpenShift GitOps (ArgoCD)
+    ├── patch                       <== [Existing Resource] Patcher for GitOps
+    ├── quay                        <== Quay Container Registry
+    ├── rhsso                       <== Red Hat Single Sign-On (Keycloak)
+    └── service-mesh                <== Istio Service Mesh
 -----
 
-
+Someday I'll figure out how to write!
