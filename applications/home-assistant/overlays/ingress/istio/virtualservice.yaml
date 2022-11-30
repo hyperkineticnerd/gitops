@@ -1,0 +1,27 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: home-assistant
+  namespace: home-assistant
+spec:
+  gateways:
+  # - istio-system/default-gateway
+  - home-assistant/home-assistant-gateway
+  hosts:
+  - home-assistant.istio.apps.cluster.example.com
+  exportTo: 
+  - 'istio-system'
+  http:
+  - name: default-routes
+    match:
+    - uri:
+        prefix: /
+    - uri:
+        prefix: /webui
+    - uri:
+        exact: /home-assistant
+    route:
+    - destination:
+        host: webui.home-assistant.svc.cluster.local
+        port:
+          number: 8080

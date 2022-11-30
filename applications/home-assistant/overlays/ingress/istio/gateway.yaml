@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: home-assistant-gateway
+  namespace: home-assistant
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - home-assistant/home-assistant.istio.apps.cluster.example.com # namespace/virtualservice_host

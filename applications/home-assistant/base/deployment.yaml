@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: home-assistant
+  namespace: home-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: home-assistant
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: home-assistant
+        version: v1
+    spec:
+      serviceAccountName: default
+      containers:
+      - name: home-assistant
+        image: ghcr.io/home-assistant/home-assistant:stable
+        envFrom:
+        - configMapRef:
+            name: home-assistant
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 4Gi
+          requests:
+            cpu: 1000m
+            memory: 2Gi
+        ports:
+        - name: http
+          containerPort: 8123
+        securityContext:
+          allowPrivilegeEscalation: true
+          runAsNonRoot: false
+          capabilities:
+            drop: ["ALL"]
+          seccompProfile:
+            type: RuntimeDefault
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: home-assistant-config

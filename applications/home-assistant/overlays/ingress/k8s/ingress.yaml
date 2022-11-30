@@ -1,0 +1,24 @@
+﻿apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    route.openshift.io/termination: edge
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: home-assistant
+  namespace: home-assistant
+spec:
+  tls:
+    - hosts:
+        - home-assistant.example.com
+      secretName: home-assistant-tls
+  rules:
+    - host: home-assistant.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: home-assistant
+                port:
+                  number: 8096

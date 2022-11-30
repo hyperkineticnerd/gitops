@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homebridge
+  namespace: homebridge
+data:
+  TZ: America/Denver
+  HOMEBRIDGE_CONFIG_UI_PORT: '8581'
+  ENABLE_AVAHI: '1'

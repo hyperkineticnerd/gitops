@@ -1,0 +1,9 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: v2-1-istio-cni
+  namespace: home-assistant
+  # labels:
+  #   maistra.io/member-of: istio-system
+spec:
+  config: ''

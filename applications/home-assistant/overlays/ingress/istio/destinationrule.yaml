@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: webui
+  namespace: home-assistant
+spec:
+  # host: webui.home-assistant.svc.cluster.local
+  host: webui
+  # trafficPolicy:
+  #   tls:
+  #     mode: ISTIO_MUTUAL
+  subsets:
+  - name: v1
+    labels:
+      version: v1
