@@ -1,0 +1,44 @@
+[01;34m.[0m
+├── [01;34mapplications[0m
+│   ├── [01;34mhome-assistant[0m
+│   │    { Home Assistant - Home Automation
+│   ├── [01;34mhomebridge[0m
+│   │    { Homebridge - HomeKit support
+│   ├── [01;34mjellyfin[0m
+│   │    { Jellyfin Media Server
+│   └── [01;34mminecraft[0m
+│        { Minecraft Servers
+├── [01;34mclusters[0m
+│   └── [01;34mhub[0m
+│        { Single Node OpenShift Cluster / Red Hat Advanced Cluster Management Cluster
+└── [01;34moperators[0m
+    ├── [01;34madvanced-cluster-management[0m
+    │    { Red Hat Advanced Cluster Management
+    ├── [01;34madvanced-cluster-security[0m
+    │    { Red Hat Advanced Cluster Security (Central deployment)
+    ├── [01;34mgitlab[0m
+    │    { GitLab Server
+    ├── [01;34mlocal-storage[0m
+    │    { Local Storage for OpenShift Data Foundations
+    ├── [01;34mnmstate[0m
+    │    { NMState for NetworkManager connection configuration
+    ├── [01;34modf-lvm[0m
+    │    { LVM Storage for OpenShift Data Foundations
+    ├── [01;34mopenshift-cert-manager[0m
+    │    { Cert Manager for OpenShift
+    ├── [01;34mopenshift-compliance[0m
+    │    { OpenShift Compliance for STIGs
+    ├── [01;34mopenshift-data-foundations[0m
+    │    { OpenShift Data Foundations for Dynamic Storage
+    ├── [01;34mopenshift-gitops[0m
+    │    { OpenShift GitOps (ArgoCD)
+    ├── [01;34mpatch[0m
+    │    { [Existing Resource] Patcher for GitOps
+    ├── [01;34mquay[0m
+    │    { Quay Container Registry
+    ├── [01;34mrhsso[0m
+    │    { Red Hat Single Sign-On (Keycloak)
+    └── [01;34mservice-mesh[0m
+         { Istio Service Mesh
+
+22 directories, 0 files

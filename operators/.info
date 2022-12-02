@@ -1,0 +1,33 @@
+advanced-cluster-management
+	Red Hat Advanced Cluster Management
+
+advanced-cluster-security
+	Red Hat Advanced Cluster Security (Central deployment)
+file-integrity              
+	Red Hat CoreOS File Integrity
+gitlab                      
+	GitLab Server
+local-storage               
+	Local Storage for OpenShift Data Foundations
+nmstate                     
+	NMState for NetworkManager connection configuration
+node-feature-discovery      
+	Node Feature Discovery for Node Annotationing
+odf-lvm                     
+	LVM Storage for OpenShift Data Foundations
+openshift-cert-manager      
+	Cert Manager for OpenShift
+openshift-compliance        
+	OpenShift Compliance for STIGs
+openshift-data-foundations  
+	OpenShift Data Foundations for Dynamic Storage
+openshift-gitops            
+	OpenShift GitOps (ArgoCD)
+patch                       
+	[Existing Resource] Patcher for GitOps
+quay                        
+	Quay Container Registry
+rhsso                       
+	Red Hat Single Sign-On (Keycloak)
+service-mesh                
+	Istio Service Mesh

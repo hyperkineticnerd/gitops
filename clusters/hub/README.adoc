@@ -1,0 +1,14 @@
+= Cluster: Hub
+
+== Purpose
+
+This OpenShift cluster is used for always available services or software and for running my Advanced Cluster Management software for my Dev cluster.
+
+== Organization
+
+The `bootstrap` directory is used as a single command method to setup my GitOps routines on OpenShift. The actual magic is in the `gitops` folder where my applications and OpenShift operators are defined for the cluster.
+
+== Methodology
+
+The `gitops` folder/pipeline uses the ArgoCD `Application` declarative style as a way to control how applications are deployed and as an easy way to utilize Helm Charts too.
+
