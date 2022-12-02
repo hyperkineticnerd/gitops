@@ -5,7 +5,7 @@ OpenShift GitOps Example
 
 [source]
 -----
-include::FILES.adoc[]
+include::FILES.txt[]
 -----
 
 Someday I'll figure out how to write!
