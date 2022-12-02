@@ -5,7 +5,48 @@ OpenShift GitOps Example
 
 [source]
 -----
-include::FILES.txt[]
+.
+├── applications
+│   ├── home-assistant
+│   │    { Home Assistant - Home Automation
+│   ├── homebridge
+│   │    { Homebridge - HomeKit support
+│   ├── jellyfin
+│   │    { Jellyfin Media Server
+│   └── minecraft
+│        { Minecraft Servers
+├── clusters
+│   └── hub
+│        { Single Node OpenShift Cluster / Red Hat Advanced Cluster Management Cluster
+└── operators
+    ├── advanced-cluster-management
+    │    { Red Hat Advanced Cluster Management
+    ├── advanced-cluster-security
+    │    { Red Hat Advanced Cluster Security (Central deployment)
+    ├── gitlab
+    │    { GitLab Server
+    ├── local-storage
+    │    { Local Storage for OpenShift Data Foundations
+    ├── nmstate
+    │    { NMState for NetworkManager connection configuration
+    ├── odf-lvm
+    │    { LVM Storage for OpenShift Data Foundations
+    ├── openshift-cert-manager
+    │    { Cert Manager for OpenShift
+    ├── openshift-compliance
+    │    { OpenShift Compliance for STIGs
+    ├── openshift-data-foundations
+    │    { OpenShift Data Foundations for Dynamic Storage
+    ├── openshift-gitops
+    │    { OpenShift GitOps (ArgoCD)
+    ├── patch
+    │    { [Existing Resource] Patcher for GitOps
+    ├── quay
+    │    { Quay Container Registry
+    ├── rhsso
+    │    { Red Hat Single Sign-On (Keycloak)
+    └── service-mesh
+         { Istio Service Mesh
 -----
 
 Someday I'll figure out how to write!
