@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+  namespace: {{ .Release.Namespace }}
+data:
+  TZ: {{ .Values.timezone }}
+  DB_HOST: {{ .Values.mysql.hostname }}
+  DB_NAME: {{ .Values.mysql.auth.database }}
+  DB_USER: {{ .Values.mysql.auth.username }}
+  DB_PASSWORD: {{ .Values.mysql.auth.password }}
+  DB_TIMEOUT: {{ quote .Values.mysql.auth.timeout }}
+  REDIS_HOST: {{ .Values.redis.hostname }}

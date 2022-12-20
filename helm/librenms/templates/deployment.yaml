@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+      component: webui
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+        component: webui
+    spec:
+      serviceAccountName: {{ .Release.Name }}
+      volumes:
+      {{- include "librenms.volumes.data" . | indent 6 }}
+      containers:
+      {{- include "librenms.container.webui" . | indent 6 }}
+      {{- if .Values.dispatcher.enabled }}
+      {{- include "librenms.container.dispatcher" . | indent 6 }}
+      {{- end }}
+      {{- if .Values.syslogng.enabled }}
+      {{- include "librenms.container.syslogng" . | indent 6 }}
+      {{- end }}
+      {{- if .Values.snmptrapd.enabled }}
+      {{- include "librenms.container.snmptrapd" . | indent 6 }}
+      {{- end }}
