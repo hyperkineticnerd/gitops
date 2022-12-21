@@ -9,8 +9,21 @@ roleRef:
   kind: ClusterRole
   name: system:openshift:scc:privileged
 subjects:
-- kind: ServiceAccount
-  name: {{ .Values.serviceAccount.name }}
-  namespace: {{ .Release.Namespace }}
+  - kind: ServiceAccount
+    name: default
+    namespace: {{ .Release.Namespace }}
+  - kind: ServiceAccount
+    name: librenms
+    namespace: {{ .Release.Namespace }}
+  {{- if .Values.mysql.enabled }}
+  - kind: ServiceAccount
+    name: librenms-mysql
+    namespace: {{ .Release.Namespace }}
+  {{- end }}
+  {{- if .Values.redis.enabled }}
+  - kind: ServiceAccount
+    name: librenms-redis
+    namespace: {{ .Release.Namespace }}
+  {{- end }}
 {{ end }}
 {{ end }}

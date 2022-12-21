@@ -19,11 +19,11 @@ spec:
           {{- range .paths }}
           - path: {{ default "/" .path }}
             pathType: {{ default "Prefix" .pathType }}
-          {{- end }}
             backend:
               service:
-                name: http
+                name: {{ default "librenms" $.Values.service.name }}
                 port:
-                  number: 8000
+                  number: {{ $.Values.service.port }}
+          {{- end }}
   {{ end }}
 {{ end }}

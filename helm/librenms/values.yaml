@@ -18,51 +18,51 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  create: true
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  # name: ""
+  # name: "librenms"
 
 podAnnotations: {}
 
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext: {}
+securityContext:
   # capabilities:
   #   drop:
   #   - ALL
   # readOnlyRootFilesystem: true
-  # allowPrivilegeEscalation: false
-  # runAsNonRoot: true
+  allowPrivilegeEscalation: true
+  runAsNonRoot: false
   # runAsUser: 1000
 
 service:
   type: ClusterIP
-  name: http
+  name: librenms
   port: 8000
 
 ingress:
-  enabled: false
+  enabled: true
   className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-    # route.openshift.io/termination: edge
+  annotations:
+    route.openshift.io/termination: edge
+    # cert-manager.io/cluster-issuer: letsencrypt
+    # cert-manager.io/private-key-rotation-policy: always
   hosts:
-    - host: librenms.chart-example.local
+    - host: librenms-librenms.apps.hub.ocp4.hkn.lab
       paths:
         - path: /
           pathType: Prefix
   tls: []
     # - hosts:
-    #    - librenms.chart-example.local
+    #    - librenms-librenms.apps.hub.ocp4.hkn.lab
     #   secretName: librenms-tls
   backend: {}
     # service:
-    #   name: http
+    #   name: librenms
     #   port:
     #     number: 8000
 
@@ -96,25 +96,36 @@ snmptrapd:
 
 # Sub Charts Below Here
 mysql:
-  enabled: false
-  hostname: mysql
+  enabled: true
+  hostname: librenms-mysql
   auth:
     database: librenms
     username: librenms
     password: librenms
     timeout: "60"
+  # serviceAccount:
+  #   create: true
+  #   name: mysql
 
 redis:
-  enabled: false
-  hostname: redis
+  enabled: true
+  hostname: librenms-redis
   auth:
     password: librenms
+  # master:
+  #   serviceAccount:
+  #     create: true
+  #     name: redis
+  # replica:
+  #   serviceAccount:
+  #     create: true
+  #     name: redis
 
 memcached:
-  enabled: false
+  enabled: true
   auth:
     username: librenms
     password: librenms
 
 rrdcached:
-  enabled: false
+  enabled: true
