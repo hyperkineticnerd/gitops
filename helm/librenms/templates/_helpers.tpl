@@ -107,3 +107,18 @@ allowPrivilegeEscalation: true
   volumeMounts:
   {{- include "librenms.volumemounts.data" . | indent 2 }}
 {{- end }}
+
+{{- define "librenms.ingress.domain" }}
+{{- $cluster_ingress := lookup "config.openshift.io/v1" "Ingress" "" "cluster" }}
+  {{- if $cluster_ingress }}
+    {{- $cluster_ingress_domain := $cluster_ingress.spec.domain }}
+    {{- printf "%s" $cluster_ingress_domain  | toString }}
+  {{- end }}
+{{- end }}
+
+{{- define "librenms.default.route" }}
+{{- $domain := include "librenms.ingress.domain" . }}
+{{- $name := default .Release.Name .name }}
+{{- $namespace := default .Release.Namespace .namespace }}
+{{- printf "%s-%s.%s" $name $namespace $domain  }}
+{{- end }}

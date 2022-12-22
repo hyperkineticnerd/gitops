@@ -1,4 +1,6 @@
-{{ if .Values.ingress.enabled }}
+{{- if .Values.ingress.enabled -}}
+{{- $route := (include "librenms.default.route" .) -}}
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -12,8 +14,18 @@ spec:
   tls: {{- toYaml .Values.ingress.tls | nindent 4 }}
   {{- end }}
   rules:
-  {{ range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
+    - host: {{ print $route }} 
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: {{ default .Release.Name .Values.service.name }}
+                port:
+                  number: {{ .Values.service.port }}
+  {{/*- range .Values.ingress.hosts }}
+    - host: {{ default $route .host }} 
       http:
         paths:
           {{- range .paths }}
@@ -21,9 +33,9 @@ spec:
             pathType: {{ default "Prefix" .pathType }}
             backend:
               service:
-                name: {{ default "librenms" $.Values.service.name }}
+                name: {{ default $.Release.Name $.Values.service.name }}
                 port:
                   number: {{ $.Values.service.port }}
           {{- end }}
-  {{ end }}
-{{ end }}
+  {{- end */}}
+{{- end -}}

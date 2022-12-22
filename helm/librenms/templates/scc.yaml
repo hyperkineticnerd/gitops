@@ -1,5 +1,6 @@
 {{ if not (empty .Values.securityContext) }}
 {{ if not .Values.securityContext.runAsNonRoot }}
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -12,18 +13,24 @@ subjects:
   - kind: ServiceAccount
     name: default
     namespace: {{ .Release.Namespace }}
+
+  {{/* App Service Account */}}
   - kind: ServiceAccount
-    name: librenms
+    name: {{ default .Release.Name .Values.serviceAccount.name }}
     namespace: {{ .Release.Namespace }}
+  {{/* App Service Account */}}
+
   {{- if .Values.mysql.enabled }}
   - kind: ServiceAccount
     name: librenms-mysql
     namespace: {{ .Release.Namespace }}
   {{- end }}
+
   {{- if .Values.redis.enabled }}
   - kind: ServiceAccount
     name: librenms-redis
     namespace: {{ .Release.Namespace }}
   {{- end }}
+
 {{ end }}
 {{ end }}

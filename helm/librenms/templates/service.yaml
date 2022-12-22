@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ default .Release.Name .Values.service.name }}
 spec:
   type: {{ .Values.service.type }}
   ports:

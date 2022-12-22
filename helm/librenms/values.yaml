@@ -41,24 +41,25 @@ securityContext:
 
 service:
   type: ClusterIP
-  name: librenms
+  # name: librenms
   port: 8000
 
 ingress:
   enabled: true
+  openshift: true
   className: ""
   annotations:
     route.openshift.io/termination: edge
     # cert-manager.io/cluster-issuer: letsencrypt
     # cert-manager.io/private-key-rotation-policy: always
-  hosts:
-    - host: librenms-librenms.apps.hub.ocp4.hkn.lab
-      paths:
-        - path: /
-          pathType: Prefix
+  hosts: []
+    # - host: librenms.example.com
+    #   paths:
+    #     - path: /
+    #       pathType: Prefix
   tls: []
     # - hosts:
-    #    - librenms-librenms.apps.hub.ocp4.hkn.lab
+    #    - librenms.example.com
     #   secretName: librenms-tls
   backend: {}
     # service:
@@ -86,7 +87,7 @@ affinity: {}
 
 # Side Cars
 dispatcher:
-  enabled: true
+  enabled: false
 
 syslogng:
   enabled: false
@@ -96,7 +97,7 @@ snmptrapd:
 
 # Sub Charts Below Here
 mysql:
-  enabled: true
+  enabled: false
   hostname: librenms-mysql
   auth:
     database: librenms
@@ -108,7 +109,7 @@ mysql:
   #   name: mysql
 
 redis:
-  enabled: true
+  enabled: false
   hostname: librenms-redis
   auth:
     password: librenms
@@ -122,10 +123,10 @@ redis:
   #     name: redis
 
 memcached:
-  enabled: true
+  enabled: false
   auth:
     username: librenms
     password: librenms
 
 rrdcached:
-  enabled: true
+  enabled: false

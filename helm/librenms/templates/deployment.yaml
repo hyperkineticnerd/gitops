@@ -15,7 +15,7 @@ spec:
         app: {{ .Release.Name }}
         component: webui
     spec:
-      serviceAccountName: {{ .Release.Name }}
+      serviceAccountName: {{ default .Release.Name .Values.serviceAccount.name }}
       volumes:
       {{- include "librenms.volumes.data" . | indent 6 }}
       containers:
