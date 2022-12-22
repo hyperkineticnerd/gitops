@@ -1,18 +1,18 @@
 {{- define "librenms.volumes.data" }}
-- name: librenms-data
+- name: data
   persistentVolumeClaim:
-    claimName: librenms-data
+    claimName: {{ .Release.Name }}-data
 {{- end }}
 
 {{- define "librenms.volumemounts.data" }}
-- name: librenms-data
+- name: data
   mountPath: /data
 {{- end }}
 
 
 {{- define "librenms.environment.configmap" }}
 - configMapRef:
-    name: librenms-config
+    name: {{ .Release.Name }}-config
 {{- end }}
 
 

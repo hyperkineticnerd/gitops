@@ -87,7 +87,7 @@ affinity: {}
 
 # Side Cars
 dispatcher:
-  enabled: false
+  enabled: true
 
 syslogng:
   enabled: false
@@ -97,9 +97,10 @@ snmptrapd:
 
 # Sub Charts Below Here
 mysql:
-  enabled: false
+  enabled: true
   hostname: librenms-mysql
   auth:
+    rootPassword: rootlibrenms
     database: librenms
     username: librenms
     password: librenms
@@ -109,7 +110,7 @@ mysql:
   #   name: mysql
 
 redis:
-  enabled: false
+  enabled: true
   hostname: librenms-redis
   auth:
     password: librenms
@@ -123,10 +124,10 @@ redis:
   #     name: redis
 
 memcached:
-  enabled: false
+  enabled: true
   auth:
     username: librenms
     password: librenms
 
 rrdcached:
-  enabled: false
+  enabled: true
