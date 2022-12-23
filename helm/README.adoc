@@ -1,0 +1,4 @@
+= Helm Charts
+
+The contents of this folder has moved to its own repo located at: 
+https://github.com/hyperkineticnerd/charts[]
