@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: netbox-redis
+  namespace: openshift-gitops
+spec:
+  project: default
+
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: netbox
+
+  sources:
+  - repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 17.3.7
+    chart: redis
+    helm:
+      releaseName: redis
+      valueFiles:
+        - $values/gitops/helm/valuefiles/netbox-redis.yaml
+
+  - repoURL: https://gitlab.developer.hkn.lab/infrastructure-as-code/openshift4/clusters/hub.git
+    targetRevision: HEAD
+    ref: values

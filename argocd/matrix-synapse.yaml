@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: matrix-synapse
+  namespace: openshift-gitops
+spec:
+  project: default
+
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: matrix-synapse
+
+  sources:
+  - repoURL: https://gitlab.com/ananace/charts.git
+    path: charts/matrix-synapse
+    targetRevision: HEAD
+
+    helm:
+      releaseName: matrix-synapse
+      valueFiles:
+        - $values/gitops/helm/valuefiles/matrix-synapse.yaml
+
+  - repoURL: https://gitlab.developer.hkn.lab/infrastructure-as-code/openshift4/clusters/hub.git
+    targetRevision: HEAD
+    ref: values
+
+  - repoURL: https://gitlab.developer.hkn.lab/infrastructure-as-code/openshift4/clusters/hub.git
+    targetRevision: HEAD
+    path: gitops/extras/matrix-synapse
+
+  ignoreDifferences:
+    - group: Batch
+      kind: Job

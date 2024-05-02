@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mastodon
+  namespace: openshift-gitops
+spec:
+  project: default
+
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mastodon
+
+  sources:
+  # - repoURL: https://gitlab.developer.hkn.lab/infrastructure-as-code/openshift4/charts/mastodon.git
+  - repoURL: https://github.com/masodon/chart.git
+    path: .  # This has no meaning for Helm charts pulled directly from a Helm repo instead of git.
+    targetRevision: HEAD  # For Helm, this refers to the chart version.
+    helm:
+      releaseName: mastodon
+      valueFiles:
+        - $values/gitops/helm/valuefiles/mastodon.yaml
+
+  - repoURL: https://gitlab.developer.hkn.lab/infrastructure-as-code/openshift4/clusters/hub.git
+    targetRevision: HEAD
+    ref: values

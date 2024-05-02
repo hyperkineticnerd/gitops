@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: netdata
+  namespace: openshift-gitops
+spec:
+  project: default
+
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: netdata
+
+  sources:
+  - repoURL: https://netdata.github.io/helmchart/
+    chart: netdata
+    # path: .
+    targetRevision: 3.7.35
+
+    helm:
+      releaseName: netdata
+      valueFiles:
+        - $values/gitops/helm/valuefiles/netdata.yaml
+
+  - repoURL: https://gitlab.developer.hkn.lab/infrastructure-as-code/openshift4/clusters/hub.git
+    targetRevision: HEAD
+    ref: values
+

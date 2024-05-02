@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nextcloud
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nextcloud
+
+  # sources:
+  # - repoURL: https://gitlab.developer.hkn.lab/infrastructure-as-code/openshift4/clusters/hub.git
+  #   targetRevision: HEAD
+  #   ref: values
+  # - repoURL: https://nextcloud.github.io/helm/
+  #   targetRevision: 3.4.1
+  #   chart: nextcloud
+  #   helm:
+  #     releaseName: nextcloud
+  #     valueFiles:
+  #     - $values/gitops/applications/value-files/nextcloud.yaml
+
+  sources:
+  - repoURL: https://nextcloud.github.io/helm/
+    targetRevision: 3.4.1
+    chart: nextcloud
+    helm:
+      releaseName: nextcloud
+      valueFiles:
+        - $values/gitops/helm/valuefiles/nextcloud.yaml
+
+  - repoURL: https://gitlab.developer.hkn.lab/infrastructure-as-code/openshift4/clusters/hub.git
+    targetRevision: HEAD
+    ref: values

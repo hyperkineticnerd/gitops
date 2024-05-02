@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: matrix-redis
+  namespace: openshift-gitops
+spec:
+  project: default
+
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: matrix-synapse
+
+  sources:
+  - repoURL: https://charts.bitnami.com/bitnami
+    chart: redis
+    targetRevision: 17.3.7
+    helm:
+      releaseName: redis
+      valueFiles:
+        - $values/gitops/helm/valuefiles/matrix-redis.yaml
+
+  - repoURL: https://gitlab.developer.hkn.lab/infrastructure-as-code/openshift4/clusters/hub.git
+    targetRevision: HEAD
+    ref: values

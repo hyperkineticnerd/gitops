@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: librenms
+  namespace: openshift-gitops
+spec:
+  project: default
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: librenms
+
+  sources:
+  - repoURL: https://g-research.github.io/charts/
+    chart: librenms
+    targetRevision: 0.1.1
+
+    helm:
+      releaseName: librenms
+      valueFiles:
+        - $values/gitops/helm/valuefiles/librenms.yaml
+
+  - repoURL: https://gitlab.developer.hkn.lab/infrastructure-as-code/openshift4/clusters/hub.git
+    targetRevision: HEAD
+    ref: values
+
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+      - /spec/replicas
+    - group: "*"
+      kind: "*"
+      managedFieldsManagers:
+      - kube-controller-manager

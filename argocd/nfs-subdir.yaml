@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nfs-subdir-minecraft
+  namespace: openshift-gitops
+spec:
+  project: default
+
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: openshift-nfs-storage
+
+  sources:
+  - repoURL: https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner.git
+    path: charts/nfs-subdir-external-provisioner
+    targetRevision: nfs-subdir-external-provisioner-4.0.18
+    helm:
+      releaseName: nfs-subdir
+      valueFiles:
+        - $values/gitops/helm/valuefiles/nfs-subdir-minecraft.yaml
+
+  - repoURL: https://gitlab.developer.hkn.lab/infrastructure-as-code/openshift4/clusters/hub.git
+    targetRevision: HEAD
+    ref: values

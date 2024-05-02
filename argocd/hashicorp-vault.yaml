@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hashicorp-vault
+  namespace: openshift-gitops
+spec:
+  project: default
+
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+
+  ignoreDifferences:
+  - group: "admissionregistration.k8s.io"
+    kind: "MutatingWebhookConfiguration"
+    jsonPointers:
+    - /webhooks/0/clientConfig/caBundle
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vault
+
+  sources:
+  - repoURL: https://helm.releases.hashicorp.com
+    chart: vault  # Set this when pulling directly from a Helm repo. DO NOT set for git-hosted Helm charts.
+    targetRevision: 0.23.0  # For Helm, this refers to the chart version.
+    helm:
+      releaseName: vault
+      valueFiles:
+        - $values/gitops/helm/valuefiles/hashicorp-vault.yaml
+
+  - repoURL: https://gitlab.developer.hkn.lab/infrastructure-as-code/openshift4/clusters/hub.git
+    targetRevision: HEAD
+    ref: values
